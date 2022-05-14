@@ -1,24 +1,38 @@
 package cl.aiep.java.cft;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.Min; //las dependencia de validacion siempre deben ser Javax.validation
 import javax.validation.constraints.Size;
 
 public class Alumno {
 
-	
+	@Min(0)
+	private int id;
 	@Size(min = 3, max = 20, message = "debes ingresar un nombre y un apellido") //se esta validando que el nombre contenga mas de 3 letras
 	private String nombre;
-	@Min(value=18, message = "avispate debes ser mayor de edad") //validacion de numero, debe ser mayor a 18
-	private int edad;
+	private LocalDate fechaNacimiento;
 	
 	
 	public Alumno() {
 	}
 
 
-	public Alumno(String nombre, int edad) {
+	public Alumno(int id, String nombre, LocalDate fechaNacimiento) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
-		this.edad = edad;
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
@@ -32,15 +46,14 @@ public class Alumno {
 	}
 
 
-	public int getEdad() {
-		return edad;
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
-	
 	
 	
 	
