@@ -2,7 +2,7 @@ package cl.aiep.java.cft.repository;
 
 import java.util.List;
 
-import cl.aiep.java.cft.Alumno;
+import cl.aiep.java.cft.modelo.Alumno;
 
 public interface AlumnoRepository {
 	

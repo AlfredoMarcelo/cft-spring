@@ -1,4 +1,4 @@
-package cl.aiep.java.cft;
+package cl.aiep.java.cft.modelo;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package cl.aiep.java.cft;
+package cl.aiep.java.cft.controller;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cl.aiep.java.cft.modelo.Alumno;
 import cl.aiep.java.cft.repository.AlumnoRepository;
 
 @Controller
@@ -29,7 +30,7 @@ public class AlumnoController {
 	}
 	
 	@GetMapping("/editar/{alumnoId}")
-	public String alumnoNuevo(@PathVariable int alumnoId, Model modelo) {
+	public String alumnoEditar(@PathVariable int alumnoId, Model modelo) {
 		Alumno alumno = alumnoRepository.findById(alumnoId);
 		modelo.addAttribute("alumno", alumno);
 		return "alumno/form";

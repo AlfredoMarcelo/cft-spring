@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate; //importacion de JdbcTemplate
 import org.springframework.stereotype.Repository; //@Repository
 
-import cl.aiep.java.cft.modelo.Alumno;
+import cl.aiep.java.cft.modelo.Carrera;
 
 @Repository //Se debe importar la anotacion de Repository
-public class AlumnoRepositoryImp implements AlumnoRepository{
+public class CarreraRepositoryImp implements CarreraRepository{
 
 	@Autowired //con Autowired inyectamos la dependencia JdbcTemplate
 	private JdbcTemplate jdbcTemplate; // se debe importar JdbcTemplate 
@@ -20,47 +20,47 @@ public class AlumnoRepositoryImp implements AlumnoRepository{
 	
 	//Desde la interface de AlumnoRepository, estamos importando los metodos*********************************** 
 	
-	private Alumno makeObject(ResultSet rs, int filaNum) throws SQLException{ //se debe importar ResultSet y SQLException
+	private Carrera makeObject(ResultSet rs, int filaNum) throws SQLException{ //se debe importar ResultSet y SQLException
 		int id 						= rs.getInt("id");
 		String nombre 				= rs.getString("nombre");
-		LocalDate fechaNacimiento 	= rs.getObject("fecha_nacimiento", LocalDate.class);
-		return new Alumno(id, nombre, fechaNacimiento);
+		String descripcion 			= rs.getString("descripcion");
+		return new Carrera(id, nombre, descripcion);
 	}
 	
 	
 	
 	@Override
-	public List<Alumno> findAll() {
-		return jdbcTemplate.query("SELECT * FROM alumnos", this::makeObject);
+	public List<Carrera> findAll() {
+		return jdbcTemplate.query("SELECT * FROM carreras", this::makeObject);
 	}
 
 	@Override
-	public Alumno findById(int id) {
-		String sql = "SELECT * FROM alumnos WHERE id = ?";
+	public Carrera findById(int id) {
+		String sql = "SELECT * FROM carreras WHERE id = ?";
 		return jdbcTemplate.queryForObject(sql, this::makeObject, id);
 	}
 
 	@Override
-	public void create(Alumno alumno) {
-		String sql = "INSERT INTO alumnos(nombre, fecha_nacimiento) VALUES(?,?)";
-		jdbcTemplate.update(sql, alumno.getNombre(), alumno.getFechaNacimiento());
+	public void create(Carrera carrera) {
+		String sql = "INSERT INTO carreras(nombre, descripcion) VALUES(?,?)";
+		jdbcTemplate.update(sql, carrera.getNombre(), carrera.getDescripcion());
 	}
 
 	@Override
-	public void edit(Alumno alumno) {
-		String sql = "UPDATE alumnos SET nombre = ?, fecha_nacimiento = ? WHERE id = ?";
+	public void edit(Carrera carrera) {
+		String sql = "UPDATE carreras SET nombre = ?, descripcion = ? WHERE id = ?";
 		jdbcTemplate.update(
 				sql,
-				alumno.getNombre(),
-				alumno.getFechaNacimiento(),
-				alumno.getId()	
+				carrera.getNombre(),
+				carrera.getDescripcion(),
+				carrera.getId()	
 		);
 		
 	}
 
 	@Override
 	public void delete(int id) {
-		String sql = "DELETE FROM alumnos WHERE id = ?";
+		String sql = "DELETE FROM carreras WHERE id = ?";
 		jdbcTemplate.update(sql, id);
 	}
 

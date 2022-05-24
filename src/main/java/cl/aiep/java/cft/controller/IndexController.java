@@ -1,4 +1,4 @@
-package cl.aiep.java.cft;
+package cl.aiep.java.cft.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
