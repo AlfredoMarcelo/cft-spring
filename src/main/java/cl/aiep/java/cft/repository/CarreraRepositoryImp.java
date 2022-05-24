@@ -2,7 +2,6 @@ package cl.aiep.java.cft.repository;
 
 import java.sql.ResultSet; //importacion
 import java.sql.SQLException; //importacion
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

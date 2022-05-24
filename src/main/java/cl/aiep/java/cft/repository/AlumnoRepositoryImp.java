@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate; //importacion de JdbcTemplate
 import org.springframework.stereotype.Repository; //@Repository
 
 import cl.aiep.java.cft.modelo.Alumno;
+import cl.aiep.java.cft.modelo.Carrera;
 
 @Repository //Se debe importar la anotacion de Repository
 public class AlumnoRepositoryImp implements AlumnoRepository{
@@ -17,6 +18,8 @@ public class AlumnoRepositoryImp implements AlumnoRepository{
 	@Autowired //con Autowired inyectamos la dependencia JdbcTemplate
 	private JdbcTemplate jdbcTemplate; // se debe importar JdbcTemplate 
 	
+	@Autowired
+	private CarreraRepository carreraRepository; 
 	
 	//Desde la interface de AlumnoRepository, estamos importando los metodos*********************************** 
 	
@@ -24,7 +27,9 @@ public class AlumnoRepositoryImp implements AlumnoRepository{
 		int id 						= rs.getInt("id");
 		String nombre 				= rs.getString("nombre");
 		LocalDate fechaNacimiento 	= rs.getObject("fecha_nacimiento", LocalDate.class);
-		return new Alumno(id, nombre, fechaNacimiento);
+		int carreraId	 			= rs.getInt("carrera_id");
+		Carrera carrera = carreraRepository.findById(carreraId);
+		return new Alumno(id, nombre, fechaNacimiento, carrera);
 	}
 	
 	
@@ -42,17 +47,21 @@ public class AlumnoRepositoryImp implements AlumnoRepository{
 
 	@Override
 	public void create(Alumno alumno) {
-		String sql = "INSERT INTO alumnos(nombre, fecha_nacimiento) VALUES(?,?)";
-		jdbcTemplate.update(sql, alumno.getNombre(), alumno.getFechaNacimiento());
+		String sql = "INSERT INTO alumnos(nombre, fecha_nacimiento, carrera_id) VALUES(?,?,?)";
+		jdbcTemplate.update(sql, alumno.getNombre()
+				, alumno.getFechaNacimiento()
+				, alumno.getCarrera().getId()
+				);
 	}
 
 	@Override
 	public void edit(Alumno alumno) {
-		String sql = "UPDATE alumnos SET nombre = ?, fecha_nacimiento = ? WHERE id = ?";
+		String sql = "UPDATE alumnos SET nombre = ?, fecha_nacimiento = ?, carrera_id = ? WHERE id = ?";
 		jdbcTemplate.update(
 				sql,
 				alumno.getNombre(),
 				alumno.getFechaNacimiento(),
+				alumno.getCarrera().getId(),
 				alumno.getId()	
 		);
 		

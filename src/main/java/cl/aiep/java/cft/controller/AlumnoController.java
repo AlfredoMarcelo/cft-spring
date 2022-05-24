@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cl.aiep.java.cft.modelo.Alumno;
+import cl.aiep.java.cft.modelo.Carrera;
 import cl.aiep.java.cft.repository.AlumnoRepository;
+import cl.aiep.java.cft.repository.CarreraRepository;
 
 @Controller
 @RequestMapping("/alumno") // prefijo de las rutas
@@ -24,8 +26,13 @@ public class AlumnoController {
 	@Autowired
 	AlumnoRepository alumnoRepository;
 	
+	@Autowired
+	CarreraRepository carreraRepository;
+	
 	@GetMapping("/nuevo") //la ruta para crear el alumno seria /alumno/nuevo
-		public String alumnoNuevo(Alumno alumno) {
+		public String alumnoNuevo(Alumno alumno, Model modelo) {
+		List<Carrera> carreras = carreraRepository.findAll();
+		modelo.addAttribute("carreras", carreras);
 		return "alumno/form";
 	}
 	
@@ -33,6 +40,8 @@ public class AlumnoController {
 	public String alumnoEditar(@PathVariable int alumnoId, Model modelo) {
 		Alumno alumno = alumnoRepository.findById(alumnoId);
 		modelo.addAttribute("alumno", alumno);
+		List<Carrera> carreras = carreraRepository.findAll();
+		modelo.addAttribute("carreras", carreras);
 		return "alumno/form";
 	}
 	
