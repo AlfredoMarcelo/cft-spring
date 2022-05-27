@@ -21,19 +21,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="alumno : ${alumnos}">
-				<th scope="row" th:text="${alumno.id}"></th>
-				<td th:text="${alumno.nombre}"></td>
-				<td th:text="${alumno.fechaNacimiento}"></td>
+			<tr th:each="carrera : ${carreras}">
+				<th scope="row" th:text="${carrera.id}"></th>
+				<td th:text="${carrera.nombre}"></td>
+				<td th:text="${carrera.descripcion}"></td>
 				<td>
-					<a class="btn btn-warning" th:href="@{/alumno/editar/{alumnoId}(alumnoId=${alumno.id})}">Editar <i class="bi bi-pencil-square"></i></a>
-					<a class="btn btn-danger" th:href="@{/alumno/eliminar(id=${alumno.id})}">Eliminar <i class="bi bi-trash-fill"></i></a>
+					<a class="btn btn-warning" th:href="@{/carrera/editar/{carreraId}(carreraId=${carrera.id})}">Editar <i class="bi bi-pencil-square"></i></a>
+					<a class="btn btn-danger" th:href="@{/carrera/eliminar/{carreraId}(carreraId=${carrera.id})}">Eliminar <i class="bi bi-trash-fill"></i></a>
 				</td>
 			
 			</tr>
 		</tbody>
 	</table>
-		<a class="btn btn-success my-1" th:href="@{/alumno/nuevo}">Nueva Carrera <i class="bi bi-person-plus-fill"></i></a>
+		<a class="btn btn-success my-1" th:href="@{/carrera/nuevo}">Nueva Carrera <i class="bi bi-person-plus-fill"></i></a>
 		<a class="btn btn-success my-1" th:href="@{/}">Volver <i class="bi bi-person-plus-fill"></i></a>
 	</div>
 </body>

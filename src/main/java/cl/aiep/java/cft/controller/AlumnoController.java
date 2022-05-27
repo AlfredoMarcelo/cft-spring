@@ -51,6 +51,8 @@ public class AlumnoController {
 	return "redirect:/alumno/listado";
 	}
 	
+	
+	//Este metodo crea el alumno nuevo
 	@PostMapping("/procesar")
 	public String alumnoProcesar(@Valid Alumno alumno, BindingResult informeValidacion) {
 	if( informeValidacion.hasErrors() ) {
@@ -64,6 +66,8 @@ public class AlumnoController {
 	}
 	return "redirect:/alumno/listado";
 	}
+	
+	
 	
 	@GetMapping("/listado")
 	public String listar(Model modelo) {

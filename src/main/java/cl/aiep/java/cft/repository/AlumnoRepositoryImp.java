@@ -48,12 +48,15 @@ public class AlumnoRepositoryImp implements AlumnoRepository{
 	@Override
 	public void create(Alumno alumno) {
 		String sql = "INSERT INTO alumnos(nombre, fecha_nacimiento, carrera_id) VALUES(?,?,?)";
-		jdbcTemplate.update(sql, alumno.getNombre()
+		jdbcTemplate.update(sql
+				, alumno.getNombre()
 				, alumno.getFechaNacimiento()
 				, alumno.getCarrera().getId()
 				);
 	}
 
+	
+	//metodo create que se importa al inyectar 
 	@Override
 	public void edit(Alumno alumno) {
 		String sql = "UPDATE alumnos SET nombre = ?, fecha_nacimiento = ?, carrera_id = ? WHERE id = ?";

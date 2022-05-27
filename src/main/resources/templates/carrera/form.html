@@ -10,20 +10,20 @@
 	<h1 class="text-center">Formulario Carrera</h1>
 	<div class="container">
 	
-	<form th:action="@{/alumno/procesar}" th:object="${alumno}" method="POST">
+	<form th:action="@{/carrera/nuevo}" th:object="${carrera}"  method="POST">
 	<div class="mb-3">
 		<input type="hidden" th:field="*{id}"/>
   		<label for="exampleFormControlInput1" class="form-label">Nombre</label>
-  		<input type="text" class="form-control" th:field="*{nombre}"   />
-  		<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color: red;"/>
-	</div>
+  		<input type="text" class="form-control" th:field="*{nombre}" />
+ 	</div>
 	<div class="mb-3">
   		<label for="exampleFormControlInput1" class="form-label">Descripcion</label>
-  		<input type="date" class="form-control" th:field="*{fechaNacimiento}" />
-  		<span th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" style="color: red;"/>
+  		<input type="text" class="form-control" th:field="*{descripcion}"  />
+  		
 	</div>
-	<button type="submit" class="btn btn-danger">Enviar <i class="bi bi-send-fill"></i></button>
+	<button type="submit" class="btn btn-success">Enviar <i class="bi bi-send-fill"></i></button>
 	</form>
+	<a   th:href="@{/}"class="btn btn-danger mt-2">Volver <i class="bi bi-back"></i></a>
 	</div>
 </body>
 </html>
